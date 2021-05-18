@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+{% extends 'notes/base.html' %}
+
+{% block block_body %}
+	<div class="center-column" style="text-align:center">
+		<p>Confirm delete {{note.title}} ??</p>
+		<form action="" method="POST" >
+			{% csrf_token %}
+            <a href="/" class="btn btn-primary">Cancel</a>
+			<input type="submit" class="btn btn-danger" value="Confirm" style="width: auto;">
+		</form>
+
+	</div>
+{% endblock block_body %}
+

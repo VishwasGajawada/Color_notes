@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'notes/base.html' %}
+{% load static %}
+
+{% block block_title %}
+    {% if user.is_authenticated %}
+		Welcome {{user.username}}
+	{% else %}
+	{% endif %}
+{% endblock block_title %}
+
+{% block block_body %}
+    <div class="center-column new-note">
+        <h4>Add a new Note</h4>
+        <form action="{% url 'add_note' %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="btn btn-info" type="submit" name="Create Task" value="Submit">
+        </form>
+    </div>
+{% endblock block_body %}
+
+{% block block_scripts %}
+<script src="{% static 'js/add_note.js' %}"></script>
+{% endblock block_scripts %}

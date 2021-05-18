@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'notes/base.html' %}
+{% load static %}
+
+{% block block_title %}
+    About COLOR NOTES
+{% endblock block_title %}
+
+{% block block_body %}
+    <div class="center-column" style="text-align:center">
+        <h3><span style="color: #98C379;">Color Notes</span>  is a Multi User <span style="color: #61AFEF">NOTES</span>  Application</h3>
+        <hr style="height:3px;border:none;color:black;background-color:black;">
+        <h2>Features</h2>
+        <div class="features">
+            <div class="feature">
+                <h4>Create your Account with just a single step</h4>
+            </div>
+            <div class="feature">
+                <h4>Add a new note effortlessly</h4>
+                <div class="spcl">
+                    <h5>Prioritise your notes by adding different colors to your notes</h5>
+                </div>
+                
+            </div>
+            <div class="feature">
+                <h4>Edit your notes anytime as you wish</h4>
+            </div>
+            <div class="feature">
+                <h4>Mobile Responsive Website Design</h4>
+            </div>
+        </div>
+        <a class="btn btn-info" href="{% url 'login' %}">Get Started By logging in</a>
+    </div>
+
+{% endblock block_body %}

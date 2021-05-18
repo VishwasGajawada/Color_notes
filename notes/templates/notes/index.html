@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends 'notes/base.html' %}
+{% load static %}
+
+{% block block_title %}
+    {% if user.is_authenticated %}
+		Welcome {{user.username}}
+	{% else %}
+	{% endif %}
+{% endblock block_title %}
+
+{% block block_body %}
+    <div class="center-column" style="text-align:center">
+        <h4><a href="{% url 'add_note' %}">Add a new Note</a></h4>
+    </div>
+    <div class="center-column">
+        <h4>Your Notes : </h4>
+        <br>
+        <div class="notes">
+            {% for note in notes %}
+                <div class="note" style="background:{{note.color}}">
+                    <h6 class="note_title">{{note.title}}</h6>
+                    <hr>
+                    <p class="note_description">{{note.description}}</p>
+                    <br>
+                    <div class="buttons">
+                        <a href="{% url 'edit_note' note.id %}" class="btn edit-btn">Edit</a>
+                        <a href="{% url 'delete_note' note.id %}" class="btn delete-btn">Delete</a>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+{% endblock block_body %}
+
+{% block block_scripts %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock block_scripts %}
