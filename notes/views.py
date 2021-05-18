@@ -65,6 +65,8 @@ def logout(request):
 @login_required(login_url='login')
 def edit_note(request,pk):
     note = Note.objects.get(id=pk)
+    if note.user!=request.user:
+        return redirect('access_error')    
     form = NoteForm(instance=note)
     if request.method == 'POST':
         form = NoteForm(request.POST,instance=note)
@@ -77,6 +79,8 @@ def edit_note(request,pk):
 @login_required(login_url='login')
 def delete_note(request,pk):
     note = Note.objects.get(id=pk)
+    if note.user!=request.user:
+        return redirect('access_error')
     if request.method == 'POST':
         note.delete()
         return redirect('/')
@@ -85,3 +89,6 @@ def delete_note(request,pk):
 
 def about(request):
     return render(request,'notes/about.html')
+
+def access_error(request):
+    return render(request,'notes/no_access.html')

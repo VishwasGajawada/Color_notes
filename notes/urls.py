@@ -10,4 +10,5 @@ urlpatterns = [
     path('about/',views.about,name='about'),
     path('edit_note/<str:pk>/',views.edit_note,name='edit_note'),
     path('delete_note/<str:pk>/',views.delete_note,name='delete_note'),
+    path('access_error',views.access_error,name='access_error'),
 ]
