@@ -23,6 +23,7 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="{% url 'about' %}">About </a>
 				</li>
+				<li class="nav-item active"><a href="{% url 'add_note' %}" class="nav-link">Add note</a></li>
 				{% if user.is_authenticated %}
 					<li class="nav-item active">
 						<a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -36,11 +37,12 @@
 					</li>
 				{% endif %}
 				
+				{% if user.is_superuser %}
+					<li class="nav-item">
+						<a class="nav-link active" href="/admin/">Admin page</a>
+					</li>
+				{% endif %}
 				
-				<li class="nav-item">
-					<a class="nav-link active" href="/admin/">Admin page</a>
-				</li>
-
 				</ul>
 				
 			</div>
