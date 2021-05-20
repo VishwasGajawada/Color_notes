@@ -1,10 +1,12 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Note
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserCreationForm,NoteForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,login as loginUser,logout as logoutUser
+
 # Create your views here.
 
 @login_required(login_url='about')
@@ -30,6 +32,9 @@ def add_note(request):
     return render(request,'notes/add_note.html',context)
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    form = AuthenticationForm()
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -40,12 +45,16 @@ def login(request):
             if user is not None:
                 loginUser(request, user)
                 return redirect('/')
-    else:
-        form = AuthenticationForm()
+            else:
+                messages.add_message(request,'Username or Password is incorrect')
+    # else:
+    #     form = AuthenticationForm()
     context = {"form":form}
     return render(request,'notes/login.html',context)
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     form = UserCreationForm()
     if request.method == 'POST':    
         # print(request.POST)

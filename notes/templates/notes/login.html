@@ -8,22 +8,49 @@ LOGIN
 
 {% block block_body %}
     <div class="center-column">
-		<form action="/login/" method="post">
+		<form  method="post">
             {% csrf_token %}
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            {{ error|escape }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+
+            {% endif %}
             {% for field in  form.visible_fields %}
                 <h4 class='pt-2'>{{field.label}}</h4>
-                {% if field.errors %}
-                    <div class="alert alert-danger">
-                        {{field.errors}}
-                    </div>
-                {% endif %}
-                
                 {{field.help_text}}
                 {{field}}
-            {% endfor %}  
-            <input type="submit" value="Login">
+            {% endfor %}
+            <input type="submit" class="btn btn-outline-success" value="login">
         </form>
+
+
+        {% comment %} {% for message in messages %}
+            <div class="alert alert-danger">
+                <p>{{message}}</p>
+            </div>
+        {% endfor %} {% endcomment %}
+                
         <hr>
         <p>Don't have an account yet ? <a href="{% url 'signup'%}">Signup Here</a></p>
 	</div>
 {% endblock block_body %}
+
+{% block block_scripts %}
+    <script>
+    //We start indexing at one because CSRF_token is considered and input field 
+        var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='Username..';
+		form_fields[2].placeholder='Enter password...';
+
+{% endblock block_scripts %}

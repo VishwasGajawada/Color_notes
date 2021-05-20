@@ -11,22 +11,26 @@ SIGN UP
         <form action="/signup/" method="post">
             {% csrf_token %}
             {% for field in  form.visible_fields %}
-                <h4 class='pt-2'>{{field.label}}</h4>
-                {{field.label}}
                 {% if field.errors %}
                     <div class="alert alert-danger">
                     {{field.errors}}
                     </div>
                 {% endif %}
-                
-                {{field.help_text}}
+            {% endfor %}
+            {% for field in  form.visible_fields %}
+                <h5 class='pt-2'>{{field.label}}</h5>
+                <!-- {{field.help_text}} -->
                 {{field}}
             {% endfor %}   
             <hr>
-            <input type="submit" value="Create Account">
+            <input type="submit" class="btn btn-outline-success" value="Create Account">
         </form>
         <hr>
         <p>Already have an account? <a href="{% url 'login'%}">Login Here</a></p>
     </div>
     
 {% endblock block_body %}
+
+
+
+
