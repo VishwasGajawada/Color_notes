@@ -13,7 +13,7 @@
     <div class="center-column" style="text-align:center">
         <h4><a href="{% url 'add_note' %}">Add a new Note</a></h4>
     </div>
-    <div class="center-column">
+    <div class="center-column" style="background:none">
         <h4>Your Notes : </h4>
         <br>
         <div class="notes">
@@ -23,7 +23,7 @@
                 </div>
             {% else %}
                 {% for note in notes %}
-                    <div class="note" style="background:{{note.color}}">
+                    <div class="note" style="background:{{note.color}}" draggable="true">
                         <h6 class="note_title">{{note.title}}</h6>
                         <hr>
                         <p class="note_description">{{note.description}}</p>
