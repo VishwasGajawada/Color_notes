@@ -15,3 +15,4 @@ class UserCreationForm(UCF):
     class Meta:
         fields =('username','email','password1','password2')
         model = User
+        
